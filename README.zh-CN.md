@@ -8,13 +8,13 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 
 ## 状态
 
-本仓库目前是骨架：目录结构、贡献规范以及 CI 与发布流水线已就绪，内容将分阶段加入。每个占位目录中的 `README.md` 说明了该目录将要存放的内容。
+目录结构、贡献规范以及 CI 与发布流水线已就绪。`toolchain/` 存放钉定的 TI edgeai-tidl-tools 版本（`versions.json`）与 x86 主机环境脚本；`board-test/` 存放从 Mo62A 仓库迁入的整机测试工具；`studio/` 仍为占位。尚未发布任何版本，发布前的内容不用于生产。
 
 ## 目录结构
 
-- `toolchain/` — Toolchain usage examples
-- `board-test/` — Board test tools
-- `studio/` — Mo Studio
+- `toolchain/` — 钉定的 TI 工具链版本、官方下载链接与主机环境脚本
+- `board-test/` — Mo62A 整机测试工具（PySide6 图形界面，经 SSH 执行，输出 HTML 报告）
+- `studio/` — Mo Studio（占位）
 - `scripts/` — 仓库维护脚本（提交信息检查、变更记录生成）
 - `.githooks/` — 本地提交信息检查钩子
 - `.github/` — Issue 表单、PR 模板与 GitHub Actions 工作流
