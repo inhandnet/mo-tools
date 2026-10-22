@@ -1,0 +1,5 @@
+# Runtime output of the test tool
+reports/
+# Windows binaries are not committed; see bin/README.md
+bin/*.exe
+bin/*.dll

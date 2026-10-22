@@ -13,15 +13,15 @@ Related repositories:
 
 ## Status
 
-This repository is a scaffold. The directory layout, contribution rules and the CI and release pipelines are in place; the content itself is added in stages. Each placeholder directory contains a `README.md` that describes what will be published there. Nothing in this repository is ready for production use until a release is published.
+The directory layout, contribution rules and the CI and release pipelines are in place. `toolchain/` holds the pinned TI edgeai-tidl-tools baseline (`versions.json`) and the x86 host setup scripts; `board-test/` holds the Mo62A desktop board test tool migrated from the Mo62A repository. `studio/` is still a placeholder. No release has been published yet; nothing here is ready for production use until one is.
 
 ## Repository layout
 
 | Path | Purpose |
 | --- | --- |
-| `toolchain/` | Toolchain usage examples. |
-| `board-test/` | Board test tools. |
-| `studio/` | Mo Studio. |
+| `toolchain/` | Pinned TI toolchain versions, official download links and host setup scripts. |
+| `board-test/` | Mo62A board test tool (PySide6 GUI over SSH, HTML reports). |
+| `studio/` | Mo Studio (placeholder). |
 | `scripts/` | Repository maintenance scripts (commit message check, changelog generation). |
 | `.githooks/` | Git hooks that run the commit message check locally. |
 | `.github/` | Issue forms, pull request template and GitHub Actions workflows. |
