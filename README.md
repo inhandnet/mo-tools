@@ -150,3 +150,7 @@ Run `node scripts/check-catalog.mjs` and `node --test tests/*.test.mjs` with Nod
 Diagrams are generated centrally by developer/scripts/render-architecture.mjs. Regenerate all repository diagrams after changing the common architecture. Diagrams show ownership; the status section and catalog define currently available content and verification.
 
 Regenerate these diagrams from developer with `node scripts/render-architecture.mjs --repo mo-tools --out /path/to/mo-tools/architecture`. Catalog and documentation changes remain in the topic PR; resource consolidation, release freezing and full-site rollout have separate acceptance. Open each diagram to read the original SVG.
+
+## Tutorial tool ownership
+
+[diagnostics/peripherals](diagnostics/peripherals/README.md) owns general GPIO, PWM and UART diagnostic scripts. [toolchain/host-setup](toolchain/README.md) owns the model-compilation host environment. Mo-docs references these tools in tutorials, and developer generates compatible download URLs from the resource map. Complete R5F applications, firmware and clients belong to mo-examples.
