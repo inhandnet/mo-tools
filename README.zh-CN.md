@@ -99,7 +99,7 @@ Node 22 下运行 `node scripts/check-catalog.mjs` 和 `node --test tests/*.test
 
 框架图由 developer/scripts/render-architecture.mjs 统一生成，修改公共架构后同步生成各仓库图。图中为职责边界；当前可用目录和验证范围以状态段及目录清单为准。
 
-生成本仓库图示：在 developer 中运行 `node scripts/render-architecture.mjs --repo mo-tools --out /path/to/mo-tools/architecture`。本轮目录与文档仍在主题 PR 中；资源归属整理、网站发布冻结及整站上线按迁移状态分别验收。点击图示可查看原始 SVG。
+生成本仓库图示：在 developer 中运行 `node scripts/render-architecture.mjs --repo mo-tools --out /path/to/mo-tools/architecture`。源仓库发布时校验目录和资源；developer 独立验收组合后的整站版本与部署。点击图示可查看原始 SVG。
 
 ## 教程工具归属
 
