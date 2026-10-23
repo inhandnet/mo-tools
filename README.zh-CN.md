@@ -8,7 +8,7 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 
 ## 状态
 
-目录结构、贡献规范以及 CI 与发布流水线已就绪。`toolchain/` 存放钉定的 TI edgeai-tidl-tools 版本（`versions.json`）与 x86 主机环境脚本；`board-test/` 存放从 Mo62A 仓库迁入的整机测试工具；`studio/` 仍为占位。尚未发布任何版本，发布前的内容不用于生产。
+目录结构、贡献规范以及 CI 与发布流水线已就绪。`toolchain/` 存放钉定的 TI edgeai-tidl-tools 版本（`versions.json`）与 x86 主机环境脚本；`board-test/` 存放从 Mo62A 仓库迁入的整机测试工具；`studio/` 仍为占位。历史发布包可在 GitHub Releases 查看；发布包的存在不代表新增硬件或生产认证。
 
 ## 目录结构
 
@@ -21,11 +21,11 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 
 ## 参与贡献
 
-通过 PR 提交到 `master`。提交信息规范、PR 流程与本地钩子启用方法见 [CONTRIBUTING.md](CONTRIBUTING.md)（`git config core.hooksPath .githooks`）。PR 必须通过 `commit-message` 与 `ci` 两项检查后才能合并。产品使用问题请到[社区论坛](https://community.inhand.com)提问。
+通过 PR 提交到 `master`。提交信息规范、PR 流程与本地钩子启用方法见 [CONTRIBUTING.md](CONTRIBUTING.md)（`git config core.hooksPath .githooks`）。PR 必须通过 `commit-message` 与 `ci` 两项检查后才能合并。使用本仓库的 GitHub Issues 提交可复现问题和功能建议。
 
 ## 发布与标签
 
-推送形如 `V<major>.<minor>.<patch>` 或 `V<major>.<minor>.<patch>-rc<n>` 的附注标签即触发发布工作流：校验标签、根据双语提交信息生成中英文变更记录、打包源码归档（含 SPDX SBOM 与 SHA-256 校验和）并创建以标签命名的 GitHub Release；`-rc` 标签发布为预发布版本。
+新发布仅使用已通过检查的 master 提交上的普通附注标签 `VX.Y.Z`；只有 developer 发布网站 RC。工作流校验目录数据、生成源码包和 SPDX SBOM，在 release.json 中记录源码提交与目录哈希，计算 SHA-256，全部附件就绪后公开 Release。历史 RC 保留不变。Changelog 中英文标题固定，条目保留英文。
 
 ## 安全
 
@@ -34,3 +34,9 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 ## 许可证
 
 见 [LICENSE](LICENSE)。
+
+## 统一网站接入
+
+toolchain/versions.json 维护 TI 工具链固定版本和官方入口，包含已有教程记录的 R5F SDK、Arm Clang、SysConfig 配套；Linux/A53 交叉编译组合仍标未验证。 developer 固定源码版本后统一校验和渲染，本仓库不部署文档网站。
+
+Node 22 下运行 `node scripts/check-catalog.mjs` 和 `node --test tests/*.test.mjs`。validation/ 是 developer 已提交规则的固定副本，通过哈希核验，不手工编辑。集成预览在 developer 中运行 `npm run preview -- --source mo-tools=/path/to/mo-tools`。

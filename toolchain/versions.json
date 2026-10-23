@@ -26,7 +26,60 @@
     "target_firmware_dir": "edgeai/11_1",
     "firmware_archive": "https://software-dl.ti.com/jacinto7/esd/tidl-tools/11_02_17_00/FIRMWARES/AM62A/edgeai/11_1/firmware.tar.gz",
     "tidl_lib_archive": "https://software-dl.ti.com/jacinto7/esd/tidl-tools/11_02_17_00/FIRMWARES/AM62A/edgeai/11_1/tidl_lib.tar.gz",
-    "mo_images": ["V1.1.0"],
+    "mo_images": [
+      "V1.1.0"
+    ],
     "board_runtime_note": "Mo62A V1.1.0 ships Python 3.13.5 and TI ONNX Runtime 1.23.0; do not install host packages on the board."
+  },
+  "r5f": {
+    "id": "mcu-r5f",
+    "board": "mo-62a",
+    "images": [
+      "V1.1.0"
+    ],
+    "host": {
+      "os": "Linux",
+      "architecture": "x86_64"
+    },
+    "verification": "documented",
+    "evidence": {
+      "repository": "inhandnet/mo-docs",
+      "commit": "c03bb2243bd5e82afc78fa57dd77460adaa6d5cf",
+      "path": "docs/mo-62a/real-time-cores/sdk-setup.mdx",
+      "scope": "Versions and installer hashes recorded by the existing tutorial; not a new SDK or board qualification."
+    },
+    "components": [
+      {
+        "name": "MCU+ SDK for AM62Ax",
+        "version": "11.01.00.16",
+        "file": "mcu_plus_sdk_am62ax_11_01_00_16-linux-x64-installer.run",
+        "bytes": 236024909,
+        "sha256": "07c2f526505c0881dd9e7b57809f8b0c98983a7b9c182180dc97c88d8724cefe",
+        "url": "https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-b4i0McWpWx/11.01.00.16/mcu_plus_sdk_am62ax_11_01_00_16-linux-x64-installer.run"
+      },
+      {
+        "name": "TI Arm Clang",
+        "version": "4.0.1.LTS",
+        "file": "ti_cgt_armllvm_4.0.1.LTS_linux-x64_installer.bin",
+        "bytes": 215898693,
+        "sha256": "a7b34001e30f60c5dba219dca45f531512ee390b0946ad862df2d291ccea395f",
+        "url": "https://www.ti.com/tool/download/ARM-CGT-CLANG/4.0.1.LTS"
+      },
+      {
+        "name": "SysConfig",
+        "version": "1.24.0.4150",
+        "file": "sysconfig-1.24.0_4150-setup.run",
+        "bytes": 168809214,
+        "sha256": "a636a502bc82ec74a7a8a136440af603d2050e3094743280bbc37a0dd5ecb8e2",
+        "url": "https://www.ti.com/tool/download/SYSCONFIG/1.24.0.4150"
+      }
+    ]
+  },
+  "linux_cross": {
+    "id": "linux-a53",
+    "board": "mo-62a",
+    "verification": "unverified",
+    "components": [],
+    "note": "No validated Linux/A53 cross-toolchain combination is published here. The existing EdgeAI C/C++ examples build natively on the board."
   }
 }
