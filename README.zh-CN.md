@@ -62,13 +62,15 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 
 ## 状态
 
-目录结构、贡献规范以及 CI 与发布流水线已就绪。`toolchain/` 存放钉定的 TI edgeai-tidl-tools 版本（`versions.json`）与 x86 主机环境脚本；`board-test/` 存放从 Mo62A 仓库迁入的整机测试工具；`studio/` 仍为占位。历史发布包可在 GitHub Releases 查看；发布包的存在不代表新增硬件或生产认证。
+目录结构、贡献规范以及 CI 与发布流水线已就绪。`products/mo62a/toolchain/` 存放钉定的 TI edgeai-tidl-tools 版本（`versions.json`）与 x86 主机环境脚本；`products/mo62a/board-test/` 存放从 Mo62A 仓库迁入的整机测试工具。历史发布包可在 GitHub Releases 查看；发布包的存在不代表新增硬件或生产认证。
 
 ## 目录结构
 
-- `toolchain/` — 钉定的 TI 工具链版本、官方下载链接与主机环境脚本
-- `board-test/` — Mo62A 整机测试工具（PySide6 图形界面，经 SSH 执行，输出 HTML 报告）
-- `studio/` — Mo Studio（占位）
+产品目录：`products.json` 列出产品，每个产品的工具链选择、主机环境、整机测试和诊断工具放在 `products/<产品>/`（Mo62A 为 `products/mo62a/`，Mo68A 为预留的 `products/mo68a/`）。不同板卡不共用这些工具。`studio/` 保留在顶层：Mo Studio 暂未设计，后续只有它会考虑跨板卡兼容。
+
+- `products/mo62a/toolchain/` — 钉定的 TI 工具链版本、官方下载链接与主机环境脚本
+- `products/mo62a/board-test/` — Mo62A 整机测试工具（PySide6 图形界面，经 SSH 执行，输出 HTML 报告）
+- `studio/` — Mo Studio（占位；唯一计划跨板卡的工具，暂未设计）
 - `scripts/` — 仓库维护脚本（提交信息检查、变更记录生成）
 - `.githooks/` — 本地提交信息检查钩子
 - `.github/` — Issue 表单、PR 模板与 GitHub Actions 工作流
@@ -93,7 +95,7 @@ InHand Mo 系列单板计算机的 Mo Studio 与工具链使用示例。
 
 ## 统一网站接入
 
-toolchain/versions.json 维护 TI 工具链固定版本和官方入口，包含已有教程记录的 R5F SDK、Arm Clang、SysConfig 配套；Linux/A53 交叉编译组合仍标未验证。 developer 固定源码版本后统一校验和渲染，本仓库不部署文档网站。
+`products/mo62a/toolchain/versions.json` 维护 TI 工具链固定版本和官方入口，包含已有教程记录的 R5F SDK、Arm Clang、SysConfig 配套；Linux/A53 交叉编译组合仍标未验证。 developer 固定源码版本后统一校验和渲染，本仓库不部署文档网站。
 
 Node 22 下运行 `node scripts/check-catalog.mjs` 和 `node --test tests/*.test.mjs`。validation/ 是 developer 已提交规则的固定副本，通过哈希核验，不手工编辑。集成预览在 developer 中运行 `npm run preview -- --source mo-tools=/path/to/mo-tools`。
 
@@ -103,4 +105,4 @@ Node 22 下运行 `node scripts/check-catalog.mjs` 和 `node --test tests/*.test
 
 ## 教程工具归属
 
-[diagnostics/peripherals](diagnostics/peripherals/README.md) 维护 GPIO、PWM、UART 通用诊断脚本；[toolchain/host-setup](toolchain/README.md) 维护模型编译的主机环境。教程与操作说明由 mo-docs 引用，developer 根据资源映射生成兼容下载地址。R5F 完整应用、固件与配套客户端归 mo-examples。
+[products/mo62a/diagnostics/peripherals](products/mo62a/diagnostics/peripherals/README.md) 维护 GPIO、PWM、UART 通用诊断脚本；[products/mo62a/toolchain/host-setup](products/mo62a/toolchain/README.md) 维护模型编译的主机环境。教程与操作说明由 mo-docs 引用，developer 根据资源映射生成兼容下载地址。R5F 完整应用、固件与配套客户端归 mo-examples。

@@ -33,7 +33,7 @@ body:
     attributes:
       label: Affected path
       description: The directory, script or example in this repository that has the problem.
-      placeholder: toolchain/
+      placeholder: products/mo62a/toolchain/
     validations:
       required: true
   - type: textarea

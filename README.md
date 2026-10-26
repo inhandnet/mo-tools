@@ -67,9 +67,11 @@ Each source repository publishes ordinary versions. Developer alone has website 
 
 ## Status
 
-The directory layout, contribution rules and the CI and release pipelines are in place. `toolchain/` holds the pinned TI edgeai-tidl-tools baseline (`versions.json`) and the x86 host setup scripts; `board-test/` holds the Mo62A desktop board test tool migrated from the Mo62A repository. `studio/` is still a placeholder. Published archives are listed under GitHub Releases; their existence does not establish hardware or production qualification.
+The directory layout, contribution rules and the CI and release pipelines are in place. `products/mo62a/toolchain/` holds the pinned TI edgeai-tidl-tools baseline (`versions.json`) and the x86 host setup scripts; `products/mo62a/board-test/` holds the Mo62A desktop board test tool migrated from the Mo62A repository. Published archives are listed under GitHub Releases; their existence does not establish hardware or production qualification.
 
 ## Repository layout
+
+Product directories: `products.json` lists the boards; each board keeps its toolchain selection, host setup, board test and diagnostics under `products/<board>/` (`products/mo62a/` for Mo62A, `products/mo68a/` reserved for Mo68A). These tools are not shared between boards. `studio/` stays at the top level: Mo Studio, not yet designed, is the only tool expected to support several boards.
 
 <table width="100%">
   <thead>
@@ -80,16 +82,16 @@ The directory layout, contribution rules and the CI and release pipelines are in
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>toolchain/</code></td>
+      <td align="left"><code>products/mo62a/toolchain/</code></td>
       <td align="left">Pinned TI toolchain versions, official download links and host setup scripts.</td>
     </tr>
     <tr>
-      <td align="left"><code>board-test/</code></td>
+      <td align="left"><code>products/mo62a/board-test/</code></td>
       <td align="left">Mo62A board test tool (PySide6 GUI over SSH, HTML reports).</td>
     </tr>
     <tr>
       <td align="left"><code>studio/</code></td>
-      <td align="left">Mo Studio (placeholder).</td>
+      <td align="left">Mo Studio (placeholder; the only tool planned to support several boards, not designed yet).</td>
     </tr>
     <tr>
       <td align="left"><code>scripts/</code></td>
@@ -143,7 +145,7 @@ This repository is licensed under the terms in [LICENSE](LICENSE). Third-party c
 
 ## Unified website integration
 
-`toolchain/versions.json` owns the selected TI toolchain versions and official download references. It includes the documented MCU+ SDK / Arm Clang / SysConfig combination; Linux/A53 cross-compilation remains explicitly unverified. SDK installers stay with TI. Developer reads a pinned source revision, validates the combined data, and renders the website; this repository has no documentation-site frontend or website deployment.
+`products/mo62a/toolchain/versions.json` owns the selected TI toolchain versions and official download references. It includes the documented MCU+ SDK / Arm Clang / SysConfig combination; Linux/A53 cross-compilation remains explicitly unverified. SDK installers stay with TI. Developer reads a pinned source revision, validates the combined data, and renders the website; this repository has no documentation-site frontend or website deployment.
 
 Run `node scripts/check-catalog.mjs` and `node --test tests/*.test.mjs` with Node 22. `validation/` is exported from a committed developer contract and checked by hash; do not edit it locally. For integrated preview, run developer's `npm run preview -- --source mo-tools=/path/to/mo-tools`.
 
@@ -153,4 +155,4 @@ Regenerate these diagrams from developer with `node scripts/render-architecture.
 
 ## Tutorial tool ownership
 
-[diagnostics/peripherals](diagnostics/peripherals/README.md) owns general GPIO, PWM and UART diagnostic scripts. [toolchain/host-setup](toolchain/README.md) owns the model-compilation host environment. Mo-docs references these tools in tutorials, and developer generates compatible download URLs from the resource map. Complete R5F applications, firmware and clients belong to mo-examples.
+[products/mo62a/diagnostics/peripherals](products/mo62a/diagnostics/peripherals/README.md) owns general GPIO, PWM and UART diagnostic scripts. [products/mo62a/toolchain/host-setup](products/mo62a/toolchain/README.md) owns the model-compilation host environment. Mo-docs references these tools in tutorials, and developer generates compatible download URLs from the resource map. Complete R5F applications, firmware and clients belong to mo-examples.

@@ -3,6 +3,7 @@
   "repository": "inhandnet/mo-tools",
   "kind": "tools",
   "catalogs": [
-    "toolchain/versions.json"
+    "products.json",
+    "products/mo62a/toolchain/versions.json"
   ]
 }
