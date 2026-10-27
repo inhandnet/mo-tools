@@ -27,15 +27,17 @@
     "firmware_archive": "https://software-dl.ti.com/jacinto7/esd/tidl-tools/11_02_17_00/FIRMWARES/AM62A/edgeai/11_1/firmware.tar.gz",
     "tidl_lib_archive": "https://software-dl.ti.com/jacinto7/esd/tidl-tools/11_02_17_00/FIRMWARES/AM62A/edgeai/11_1/tidl_lib.tar.gz",
     "mo_images": [
-      "V1.1.0"
+      "V1.1.0",
+      "V1.1.1"
     ],
-    "board_runtime_note": "Mo62A V1.1.0 ships Python 3.13.5 and TI ONNX Runtime 1.23.0; do not install host packages on the board."
+    "board_runtime_note": "Mo62A V1.1.0 and V1.1.1 ship Python 3.13.5 and TI ONNX Runtime 1.23.0; do not install host packages on the board."
   },
   "r5f": {
     "id": "mcu-r5f",
     "board": "mo-62a",
     "images": [
-      "V1.1.0"
+      "V1.1.0",
+      "V1.1.1"
     ],
     "host": {
       "os": "Linux",

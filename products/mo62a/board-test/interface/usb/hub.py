@@ -16,6 +16,28 @@ EXPECTED_STORAGE = 4
 
 
 # ── 工具：找所有 USB 块设备（磁盘级，非分区）─────────────────────────────────
+def _hub_port_devices(board) -> dict[str, str]:
+    """Map each populated downstream port of the on-board hub to a device name."""
+    rc, out, _ = board.run(
+        "for d in /sys/bus/usb/devices/*; do "
+        "[ -f \"$d/idVendor\" ] || continue; "
+        "echo \"$(basename \"$d\")|$(cat \"$d/idVendor\"):$(cat \"$d/idProduct\")|$(cat \"$d/product\" 2>/dev/null | tr -cd '[:print:]')\"; "
+        "done"
+    )
+    if rc != 0:
+        return {}
+    rows = [line.split("|", 2) for line in out.splitlines() if line.count("|") == 2]
+    hubs = [path for path, ids, _ in rows if ids == HUB_VID_PID]
+    ports: dict[str, str] = {}
+    for hub in hubs:
+        for path, ids, name in rows:
+            # Devices directly on a hub port are named <hub>.<port>.
+            m = re.fullmatch(re.escape(hub) + r"\.(\d+)", path)
+            if m:
+                ports.setdefault(m.group(1), name.strip() or ids)
+    return ports
+
+
 def _usb_block_devices(board) -> list[str]:
     """返回 ['sda','sdb',...] 形式的 USB 块设备列表。"""
     _, out, _ = board.run(
@@ -48,12 +70,15 @@ class UsbPortTest(TestCase):
     name_key     = "tn_usb_enum"
 
     def _run(self):
-        devs = _usb_block_devices(self.board)
-        count = len(devs)
+        # Count the hub's downstream ports that have any device attached
+        # (keyboard, camera, storage ...), not only USB storage.
+        ports = _hub_port_devices(self.board)
+        count = len(ports)
+        detail = ", ".join(f"{port}:{name}" for port, name in sorted(ports.items()))
         if count >= EXPECTED_STORAGE:
-            self.pass_(t("msg_usb_count", count))
+            self.pass_(t("msg_usb_count", count) + f" ({detail})")
         elif count > 0:
-            self.fail(t("msg_usb_count_expected", count, EXPECTED_STORAGE))
+            self.fail(t("msg_usb_count_expected", count, EXPECTED_STORAGE) + f" ({detail})")
         else:
             self.fail(t("msg_usb_none"))
 
