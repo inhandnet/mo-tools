@@ -84,9 +84,15 @@ class EthernetIPTest(TestCase):
             self.fail(t("msg_eth_iface_missing"))
             return
 
+        # Prefer the DHCP/static address; a 169.254 link-local address is also
+        # present when NetworkManager enables IPv4 link-local on the port.
         rc, out, _ = self.cmd(
-            f"ip -4 addr show {iface} | grep inet | awk '{{print $2}}' | head -1"
+            f"ip -4 -o addr show dev {iface} scope global | awk '{{print $4}}' | head -1"
         )
+        if rc == 0 and not out.strip():
+            rc, out, _ = self.cmd(
+                f"ip -4 -o addr show dev {iface} | awk '{{print $4}}' | head -1"
+            )
         if rc != 0 or not out.strip():
             self.fail(t("msg_eth_ip_missing", iface))
             return
